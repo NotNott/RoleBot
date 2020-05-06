@@ -10,7 +10,6 @@ bot.login(token);
 //help menu
 bot.on('message', (message) => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
-
     const args = message.content.slice(prefix.length).split(' ');
     const command = args.shift().toLowerCase();
 
@@ -23,7 +22,7 @@ bot.on('message', (message) => {
 })
 //create roles
 bot.on('message', (message, guild) => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
 
     const args = message.content.slice(prefix.length).split(' ');
     const command = args.shift().toLowerCase();
@@ -44,7 +43,7 @@ bot.on('message', (message, guild) => {
     }});
 //list roles
 bot.on('message', (message, guild) => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
     
         const args = message.content.slice(prefix.length).split(' ');
         const command = args.shift().toLowerCase();
@@ -62,7 +61,7 @@ bot.on('message', (message, guild) => {
 })
 //add roles
 bot.on('message', (message, guild) => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
     
         const args = message.content.slice(prefix.length).split(' ');
         const command = args.shift().toLowerCase();
@@ -80,7 +79,7 @@ bot.on('message', (message, guild) => {
 );
 //remove roles
 bot.on('message', (message, guild, client, ) => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
     
         const args = message.content.slice(prefix.length).split(' ');
         const command = args.shift().toLowerCase();
@@ -98,7 +97,7 @@ bot.on('message', (message, guild, client, ) => {
 );
 //delete roles
 bot.on('message', (message, guild, client, ) => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
     
         const args = message.content.slice(prefix.length).split(' ');
         const command = args.shift().toLowerCase();
