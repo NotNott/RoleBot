@@ -16,10 +16,7 @@ bot.on('message', (message) => {
     if (command == 'help'){
 
     return message.channel.send (helpList);
-    
-    }
-
-})
+}})
 //create roles
 bot.on('message', (message, guild) => {
     if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
@@ -40,7 +37,7 @@ bot.on('message', (message, guild) => {
             .then(console.log)
             .catch(console.error);
             return message.reply ('You have made a new role.')
-    }});
+}});
 //list roles
 bot.on('message', (message, guild) => {
     if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
@@ -59,7 +56,7 @@ bot.on('message', (message, guild) => {
         }   
     }
 })
-//add roles
+//add roles to user
 bot.on('message', (message, guild) => {
     if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
     
@@ -75,9 +72,8 @@ bot.on('message', (message, guild) => {
         else user.roles.add(role);
           return message.reply ("Role Be There.")
         }
-    }        
-);
-//remove roles
+});
+//remove roles form user
 bot.on('message', (message, guild, client, ) => {
     if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
     
@@ -93,8 +89,7 @@ bot.on('message', (message, guild, client, ) => {
         else user.roles.remove(role);
           return message.reply ("Role Be Gone.")
        
-    }}
-);
+}});
 //delete roles
 bot.on('message', (message, guild, client, ) => {
     if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
@@ -114,3 +109,33 @@ bot.on('message', (message, guild, client, ) => {
 
 
 })
+//add roles to self
+bot.on('message', (message, guild, client, ) => {
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    
+        const args = message.content.slice(prefix.length).split(' ');
+        const command = args.shift().toLowerCase();
+
+    if (command == "parole"){
+        var role= message.member.guild.roles.cache.find(role => role.name === args[0]);
+        if(!role) return message.reply(args[0] + " aint a roll");
+         
+        else message.member.roles.add(role);
+          return message.reply ("Role be on you.")
+       
+}});
+//remove roles from self
+bot.on('message', (message, guild, client, ) => {
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    
+        const args = message.content.slice(prefix.length).split(' ');
+        const command = args.shift().toLowerCase();
+
+    if (command == "prrole"){
+        var role= message.member.guild.roles.cache.find(role => role.name === args[0]);
+        if(!role) return message.reply(args[0] + " aint a roll");
+        
+        else message.member.roles.remove(role);
+          return message.reply ("Role be gone from you.")
+       
+}});
