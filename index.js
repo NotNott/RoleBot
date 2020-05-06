@@ -2,8 +2,26 @@ const discord = require ('discord.js');
 const bot = new discord.Client();
 const {prefix, token} = require('./config.json');
 
-bot.login(token);
+const fs = require('fs');
 
+var helpList = fs.readFileSync('./Helplist.txt', 'utf-8');
+
+bot.login(token);
+//help menu
+bot.on('message', (message) => {
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+    const args = message.content.slice(prefix.length).split(' ');
+    const command = args.shift().toLowerCase();
+
+    if (command == 'help'){
+
+    return message.channel.send (helpList);
+    
+    }
+
+})
+//create roles
 bot.on('message', (message, guild) => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -15,8 +33,8 @@ bot.on('message', (message, guild) => {
         message.guild.roles.create(
         {
             data: {
-              name : args[0] + ' ' + args[1],
-              color : args[2],        
+              name : args[0],
+              color : Math.floor(Math.random() * 16777214) + 1,        
         },
             reason: 'We are Lazy.',       
         })
@@ -24,6 +42,7 @@ bot.on('message', (message, guild) => {
             .catch(console.error);
             return message.reply ('You have made a new role.')
     }});
+//list roles
 bot.on('message', (message, guild) => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
     
@@ -31,11 +50,17 @@ bot.on('message', (message, guild) => {
         const command = args.shift().toLowerCase();
     
     if (command == "frole"){
-        message.guild.roles.fetch("member")
-        return message.reply ('You'+  +'roles.')
-    
+        var role = message.guild.roles.cache.forEach(role => {
+        message.channel.send(role.name);
+         });     
+        {
+        return message.reply("Thems the roles.")
 
-    }});
+
+        }   
+    }
+})
+//add roles
 bot.on('message', (message, guild) => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
     
@@ -43,39 +68,50 @@ bot.on('message', (message, guild) => {
         const command = args.shift().toLowerCase();
     
     if (command == "arole"){
-        var role= message.member.guild.roles.cache.find(role => role.name === args[0]+args[1]);
-        if(!role) return message.reply("role dont be here.");
-        else message.member.roles.add(role);{
-            return message.reply ("Role Be Here.")
+        var user = message.mentions.members.first();
+        var role= message.member.guild.roles.cache.find(role => role.name === args[0]);
+        if(!role) return message.reply(args[0] + " aint a roll");
+        if(!user) return message.reply ("Aint nobody named that.");
+         
+        else user.roles.add(role);
+          return message.reply ("Role Be There.")
         }
-    }});
-bot.on('message', (message, guild) => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
-        
-            const args = message.content.slice(prefix.length).split(' ');
-            const command = args.shift().toLowerCase();
-        
-    if (command == "rrole"){
-            var role= message.member.guild.roles.cache.find(role => role.name === args[0]);
-            if(!role) return message.reply("role dont be here.");
-            else message.member.roles.remove(role);{
-                return message.reply ("Role Be Gone.")
-           
- 
-    }};
-
-bot.on('message', (message, guild) => {
+    }        
+);
+//remove roles
+bot.on('message', (message, guild, client, ) => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
     
         const args = message.content.slice(prefix.length).split(' ');
         const command = args.shift().toLowerCase();
 
-    if (command == "drole"){
-        guild.roles.find(role => role.name === args[0]).delete();
-            return message.reply ("Role Be Gone.")
-   
+    if (command == "rrole"){
+        var user = message.mentions.members.first();
+        var role= message.member.guild.roles.cache.find(role => role.name === args[0]);
+        if(!role) return message.reply(args[0] + " aint a roll");
+        if(!user) return message.reply ("Aint nobody named that.");
+         
+        else user.roles.remove(role);
+          return message.reply ("Role Be Gone.")
        
-    }
-});
+    }}
+);
+//delete roles
+bot.on('message', (message, guild, client, ) => {
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    
+        const args = message.content.slice(prefix.length).split(' ');
+        const command = args.shift().toLowerCase();
 
- })
+        if (command == "drole") {
+            var role= message.member.guild.roles.cache.find(role => role.name === args[0]);
+            if(!role) return message.reply(args[0] + " aint a roll");
+
+            else role.delete();
+            return message.reply("deleted " + args[0])
+
+        }
+
+
+
+})
