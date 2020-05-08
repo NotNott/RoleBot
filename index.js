@@ -5,7 +5,7 @@ const {prefix, token} = require('./config.json');
 const fs = require('fs');
 
 var helpList = fs.readFileSync('./Helplist.txt', 'utf-8');
-
+/////
 bot.login(token);
 //help menu
 bot.on('message', (message) => {
