@@ -1,8 +1,8 @@
 I do this stuff if you say '!' and got permission. Everythings limited to a length of two. 
-crole - Create Role for server 
-arole - Add Role by role @username
-parole - Add Role to self
-rrole - Removes Role by role @username
-prrole - Removes Role from self
-frole - Lists available Roles
-drole - Deletes Role from server
+create - Create Role for server 
+give - Add Role by role @username
+add - Add Role to self
+take - Removes Role by role @username
+remove - Removes Role from self
+list - Lists available Roles
+delete - Deletes Role from server
