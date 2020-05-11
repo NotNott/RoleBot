@@ -6,3 +6,11 @@ take - Removes Role by role @username
 remove - Removes Role from self
 list - Lists available Roles
 delete - Deletes Role from server
+perm - Give Role permissions to a Role
+The rest give roles colors
+Red
+Blue
+Green
+Yellow
+Pink
+
