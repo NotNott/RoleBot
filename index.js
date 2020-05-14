@@ -16,10 +16,9 @@ for (const file of commandFiles) {
 	bot.commands.set(command.name, command);
 }
 
-
 bot.login(token);
 
-//help menu
+
 bot.on('message', (message) => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
     const args = message.content.slice(prefix.length).split(' ');
