@@ -29,7 +29,6 @@ bot.on('message', (message) => {
 
     return message.channel.send (helpList);
 }});
-//create roles
 
 bot.on('message', (message, guild) => {
     if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
