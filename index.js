@@ -29,48 +29,7 @@ bot.on('message', (message) => {
     return message.channel.send (helpList);
 }});
 
-bot.on('message', (message, guild) => {
-    if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
-    const args = message.content.slice(prefix.length).split(' ');
-    const command = args.shift().toLowerCase();
 
-    if (command == 'create'){
-      bot.commands.get('create').execute(message, args);}
-
-    else if (command == 'give'){
-      bot.commands.get('give').execute(message, args);}
-        
-    else if (command == 'take'){
-      bot.commands.get('take').execute(message, args);}
-          
-    else if (command == 'delete'){
-      bot.commands.get('delete').execute(message, args);}
-            
-    else if (command == 'add'){
-      bot.commands.get('add').execute(message, args);}
-
-    else if (command == 'remove'){
-      bot.commands.get('remove').execute(message, args);}  
-
-    else if (command == 'perm'){
-      bot.commands.get('perm').execute(message, args);}
-
-    else if (command == 'blue'){
-      bot.commands.get('blue').execute(message, args);}
-
-    else if (command == 'red'){
-      bot.commands.get('red').execute(message, args);}
-
-    else if (command == 'green'){
-      bot.commands.get('green').execute(message, args);}
-          
-    else if (command == 'yellow'){
-      bot.commands.get('yellow').execute(message, args);}
-            
-    else if (command == 'pink'){
-      bot.commands.get('pink').execute(message, args);}
-       
-})
 //list roles
 bot.on('message', (message, guild) => {
     if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
@@ -88,5 +47,58 @@ bot.on('message', (message, guild) => {
 
         }   
     }
-});
- 
+  })
+
+  bot.on('message', async (message, guild) => {
+    if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
+    const args = message.content.slice(prefix.length).split(' ');
+    const command = args.shift().toLowerCase();
+    const user = message.mentions.members.first();
+    const role= message.member.guild.roles.cache.find(role => role.name === args.join(' '));
+    const userRole = message.mentions.roles.first();
+    const roleName= args.join(' ');
+    
+    
+    if (command == 'create'){
+      bot.commands.get('create').execute(message, roleName);}
+
+    if (!role) {return message.reply('Aint no role')}
+    if (message.mentions.members.size === 0 && !role) {return message.reply ("Aint nobody named that.");}
+          
+    if (command == 'delete'){
+      bot.commands.get('delete').execute(message, role);}
+            
+    if (command == 'add'){
+      bot.commands.get('add').execute(message, role);}
+
+    if (command == 'remove'){
+      bot.commands.get('remove').execute(message, role);}  
+
+    if (command == 'perm'){
+      bot.commands.get('perm').execute(message, role);}
+
+    if (command == 'blue'){
+      bot.commands.get('blue').execute(message, role);}
+
+    if (command == 'red'){
+      bot.commands.get('red').execute(message, role);}
+
+    if (command == 'green'){
+      bot.commands.get('green').execute(message, role);}
+          
+    if (command == 'yellow'){
+      bot.commands.get('yellow').execute(message, role);}
+            
+    if (command == 'pink'){
+      bot.commands.get('pink').execute(message, role);}
+      
+      
+      
+    if (message.mentions.members.size === 0 && !role) {return message.reply ("Aint nobody named that.");}
+    if (command == 'give'){
+      bot.commands.get('give').execute(message, userRole, user);}
+          
+    if (command == 'take'){
+      bot.commands.get('take').execute(message, userRole, user);}
+       
+})
