@@ -1,6 +1,6 @@
 const discord = require ('discord.js');
 const bot = new discord.Client();
-const {prefix, token} = require('./config.json');
+const {prefix, token, prefix2} = require('./config.json');
 
 const fs = require('fs');
 //client.commands = new Discord.collection();
@@ -55,15 +55,16 @@ bot.on('message', (message, guild) => {
     const command = args.shift().toLowerCase();
     const user = message.mentions.members.first();
     const role= message.member.guild.roles.cache.find(role => role.name === args.join(' '));
-    const userRole = message.mentions.roles.first();
-    const roleName= args.join(' ');
+    const roleName = args.join(' ');
+    //const userRole = message.member.guild.roles.cache.find(role => role.name === message.mentions.guild.roles);
+  
     
     
     if (command == 'create'){
       bot.commands.get('create').execute(message, roleName);}
-
-    if (!role) {return message.reply('Aint no role')}
-    if (message.mentions.members.size === 0 && !role) {return message.reply ("Aint nobody named that.");}
+    if (!role && command !== 'create') {return message.reply('Aint no role')}
+    if (!role && !userRole) {return message.reply('Gotta use a real role')}
+    if (message.mentions.members.size === 0 && !role  && !userRole) {return message.reply ("Aint nobody named that.");}
           
     if (command == 'delete'){
       bot.commands.get('delete').execute(message, role);}
@@ -91,7 +92,6 @@ bot.on('message', (message, guild) => {
             
     if (command == 'pink'){
       bot.commands.get('pink').execute(message, role);}
-      
       
       
     if (message.mentions.members.size === 0 && !role) {return message.reply ("Aint nobody named that.");}
