@@ -49,23 +49,19 @@ bot.on('message', (message, guild) => {
     }
   })
 
-  bot.on('message', async (message, guild) => {
+bot.on('message', async (message, guild) => {
     if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
     const args = message.content.slice(prefix.length).split(' ');
     const command = args.shift().toLowerCase();
-    const user = message.mentions.members.first();
     const role= message.member.guild.roles.cache.find(role => role.name === args.join(' '));
     const roleName = args.join(' ');
-    //const userRole = message.member.guild.roles.cache.find(role => role.name === message.mentions.guild.roles);
-  
     
     
     if (command == 'create'){
       bot.commands.get('create').execute(message, roleName);}
-    if (!role && command !== 'create') {return message.reply('Aint no role')}
-    if (!role && !userRole) {return message.reply('Gotta use a real role')}
-    if (message.mentions.members.size === 0 && !role  && !userRole) {return message.reply ("Aint nobody named that.");}
-          
+
+    if (!role && command !== 'create' && command !== 'give' && command !== 'take') {return message.channel.send('Sorry, that role was not found.')}
+         
     if (command == 'delete'){
       bot.commands.get('delete').execute(message, role);}
             
@@ -93,12 +89,22 @@ bot.on('message', (message, guild) => {
     if (command == 'pink'){
       bot.commands.get('pink').execute(message, role);}
       
-      
-    if (message.mentions.members.size === 0 && !role) {return message.reply ("Aint nobody named that.");}
+    });
+
+
+bot.on('message', async (message, guild) => {     
+    if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
+    const args = message.content.slice(prefix.length).split(' ');
+    const command = args.shift().toLowerCase();
+    const User = message.mentions.members.first();
+   // const realUser= message.member.cache.find(user => user.id === buser)
+    
+    if (!User && (command == 'give' || command == 'take') ) {return message.reply ("Aint nobody named here.");}
+
     if (command == 'give'){
-      bot.commands.get('give').execute(message, userRole, user);}
+      bot.commands.get('give').execute(message, args, User);}
           
     if (command == 'take'){
-      bot.commands.get('take').execute(message, userRole, user);}
+      bot.commands.get('take').execute(message, args, User);}
        
 })
