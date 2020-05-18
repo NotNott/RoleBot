@@ -15,5 +15,5 @@ module.exports = {
             catch(error){
             console.log(error);
             console.log(Name);}
-            return message.reply ('You have made a new role.');}}
+            return message.reply ('You have made a new role called ' + `${Name}`);}}
    
