@@ -18,21 +18,25 @@ bot.login(token);
 bot.on('message', async (message) => {
     if (!message.content.startsWith(prefix) || message.author.bot || !message.member.hasPermission('MANAGE_ROLES')) return;
     const args = message.content.slice(prefix.length).split(' ');
-    const command = args.shift().toLowerCase();
+    const commandName = args.shift().toLowerCase();
     const Role = message.mentions.roles.first(99);
     const Name = args.join(' ');
     const User = message.mentions.members.first(99);
+    const command = bot.commands.get(commandName) || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
     
-    if (Role.length == 0 && command !== 'create' && command !== 'help' && command !== 'list') {return message.channel.send('Sorry, that role was not found.')}
-    if (User.length == 0 && (command == 'give' || command == 'take') ) {return message.reply ("That name doesnt match a user.");}
-    
-    if (command == 'create') {
-      bot.commands.get(command).execute(message, Name);
+    if (!command) return message.channel.send("That is not one of my commands.");
+  
+    if (commandName == 'create') {
+      command.execute(message, Name);
     }
     else try{
-      bot.commands.get(command).execute(message, Role, User);
+      command.execute(message, Role, User);
       } catch(e){
           console.log(error);
+
+    if (Role.length == 0) {return message.channel.send('Sorry, that role was not found.')}
+    if (User.length == 0) {return message.reply ("That name does not match a user.");}
+    
     }});
 
 

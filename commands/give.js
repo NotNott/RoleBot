@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'give',
-	description: '',
+  description: '',
+  aliases:['g'],
   execute(message, Role, User){  
     User.forEach(user => {
       user.roles.add(Role)});

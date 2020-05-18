@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'delete',
-	description: '',
+    description: '',
+    aliases: ['d','del'],
     execute(message, Role){
         Role.forEach(role =>{
         role.delete()

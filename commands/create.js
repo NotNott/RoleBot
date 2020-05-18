@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'create',
-	description: '',
+    description: '',
+    aliases: ['c', 'make'],
     execute(message, Name){ 
         console.log(Name)
       try{   

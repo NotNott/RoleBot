@@ -1,6 +1,6 @@
 module.exports = {
     name: 'blue',
-    description: '',
+    description: 'It makes the role blue',
     execute(message, Role) {
       Role.forEach(role => {
         role.setColor( '#0000ff');})

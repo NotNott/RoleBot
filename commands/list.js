@@ -1,7 +1,9 @@
 const Discord = require('discord.js');
 module.exports = {
-	name: 'list',
-	description: '',
+    name: 'roles',
+    cooldown: 10,
+    description: '',
+    aliases: ['list', 'r', 'rolelist'],
     execute(message) {
         const exampleEmbed = new Discord.MessageEmbed().setTitle('These are the roles and how many people have them.');
         

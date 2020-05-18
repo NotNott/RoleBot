@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'take',
-	description: '',
+  description: '',
+  aliases: ['t'],
   execute(message, Role, User){ 
      try{ 
        User.forEach(user => {
