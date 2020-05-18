@@ -1,6 +1,7 @@
 module.exports = {
     name: 'red',
     description: '',
-    execute(message, role) {
-      role.edit( {color : '#FF0000' })
-        return message.channel.send ("Role has red")}}
+    execute(message, Role) {
+      Role.forEach(role => {
+        role.setColor( '#FF0000' )});
+        return message.channel.send (`${Role} is now the color red`)}}

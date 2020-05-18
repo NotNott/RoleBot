@@ -1,10 +1,10 @@
 module.exports = {
 	name: 'list',
 	description: '',
-    execute(message, guild) {
-        var role = message.guild.roles.cache.forEach(role => {
+    execute(message) {
+        message.guild.roles.cache.forEach(role => {
         message.channel.send(role.name);
-         });     
-        {
-        return message.reply("Thems the roles.")
-}}}
+         });  
+        
+        return message.channel.send("Above you will find a list of rolls. To interact with them just type @ before their name.");
+}}

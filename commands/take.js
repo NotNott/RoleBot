@@ -1,9 +1,14 @@
 module.exports = {
 	name: 'take',
 	description: '',
-  execute(message, role, User){ 
-      User.roles.remove(role);
-        return message.channel.send (`${role} has been removed from  ${User}'s list of rolls.`);}}
-
+  execute(message, Role, User){ 
+     try{ 
+       User.forEach(user => {
+         user.roles.remove(Role)
+       });
+        return message.channel.send (`${Role} removed from  ${User}'s list of rolls.`);
+      }catch(e){
+        //
+      }}}
   
     

@@ -1,6 +1,6 @@
 module.exports = {
     name: 'remove',
     description: '',
-    execute(message, role) {
-      message.member.roles.remove(role);
+    execute(message, Role) {
+      message.member.roles.remove(Role);
         return message.reply ("Role be gone from you.")}}

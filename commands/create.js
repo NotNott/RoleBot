@@ -1,18 +1,19 @@
 module.exports = {
 	name: 'create',
 	description: '',
-    execute(message, roleName){ 
+    execute(message, Name){ 
+        console.log(Name)
+      try{   
         message.guild.roles.create(
         {
             data: {
-              name : roleName,
+              name : Name,
               color : Math.floor(Math.random() * 16777214) + 1,        
         },
             reason: 'We are Lazy.',       
-        })
-            .then(console.log)
-            .catch(console.error);
-            return message.reply ('You have made a new role.');}
-
-    }
+        })}
+            catch(error){
+            console.log(error);
+            console.log(Name);}
+            return message.reply ('You have made a new role.');}}
    
