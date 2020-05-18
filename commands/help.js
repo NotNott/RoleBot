@@ -12,9 +12,6 @@ const { commands } = message.client;
 const args = message.content.slice(prefix.length).split(/ +/);
 const name = args[1];
 const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
-console.log(args);
-console.log(name);
-console.log(args.length);
 
 if (args.length == 1){
     data.push('Here\'s a list of commands:');
@@ -41,7 +38,7 @@ if (command.description) data.push(`**Description:** ${command.description}`);
 if (command.usage) data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
 
     data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
-
+    message.reply(`you have been sent a description of \"${command.name}\".`)
     message.author.send(data, { split: true });}}
 
 

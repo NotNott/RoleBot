@@ -26,10 +26,10 @@ bot.on('message', async (message) => {
     
     if (!command) return message.channel.send("That is not one of my commands.");
   
-    if (commandName == 'create') {
+    if (commandName == 'create' || commandName == 'c' || commandName == 'make') {
       command.execute(message, Name);
     }
-    else try{
+    try{
       command.execute(message, Role, User);
       } catch(e){
           console.log(error);

@@ -6,4 +6,4 @@ module.exports = {
   execute(message, Role, User){  
     User.forEach(user => {
       user.roles.add(Role)});
-        return message.channel.send (`${Role} has been added to  ${User}'s list of rolls.`);}}
+        return message.channel.send (`${Role} has been added to ${User} list of rolls.`);}}

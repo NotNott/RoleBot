@@ -4,7 +4,6 @@ module.exports = {
     usage: '!create name',
     aliases: ['c', 'make'],
     execute(message, Name){ 
-        console.log(Name)
       try{   
         message.guild.roles.create(
         {
@@ -15,7 +14,6 @@ module.exports = {
             reason: 'We are Lazy.',       
         })}
             catch(error){
-            console.log(error);
-            console.log(Name);}
-            return message.reply ('You have made a new role called ' + `${Name}`);}}
+            console.log(error);}
+            return message.reply (`You have made a new role called \"${Name}\"`);}}
    
