@@ -1,6 +1,7 @@
 module.exports = {
-	name: 'take',
-  description: '',
+  name: 'take',
+  description: 'Removes roles from the selected users list of roles.',
+  usage: '!take @user @role',
   aliases: ['t'],
   execute(message, Role, User){ 
      try{ 

@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'delete',
-    description: '',
+    description: 'Deletes an existing roll',
+    usage: '!delete @role',
     aliases: ['d','del'],
     execute(message, Role){
         Role.forEach(role =>{

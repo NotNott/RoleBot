@@ -1,25 +1,30 @@
 module.exports = {
 name: 'help',
-description: '',
+description: 'Used to create a list of commands and to get a description of them.',
+usage: '!help or !help command',
 aliases: ['h', 'info'],
 cooldown: 5,
+args: true,
 execute(message){
 const { prefix } = require('../config.json');
 const data = [];
 const { commands } = message.client;
-const args = message.content.slice(prefix.length).split(' ');
-const name = args.shift().toLowerCase();
-const command = commands.get(args[0]) || commands.find(c => c.aliases && c.aliases.includes(args[0]));
+const args = message.content.slice(prefix.length).split(/ +/);
+const name = args[1];
+const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
+console.log(args);
+console.log(name);
+console.log(args.length);
 
-if (!args.length){
-    data.push('Here\'s a list of all my commands:');
+if (args.length == 1){
+    data.push('Here\'s a list of commands:');
     data.push(commands.map(command => command.name).join(', '));
-    data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
+    data.push(`\nYou can send \`${prefix}help command\` to get info on a specific command!`);
     
 return message.author.send(data, { split: true })
     .then(() => {
         if (message.channel.type === 'dm') return;
-        message.reply('I\'ve sent you a DM with all my commands!');})
+        message.reply('you have been DMd a list of commands.');})
 
     .catch(error => {
         console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
@@ -27,8 +32,9 @@ return message.author.send(data, { split: true })
 });}
 
 if (!command) {
-return message.reply('that\'s not a valid command!');}
-    data.push(`**Name:** ${command.name}`);
+return message.reply('that\'s not a command. Try !help for a list of available commands.');}
+
+data.push(`**Name:** ${command.name}`);
     
 if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
 if (command.description) data.push(`**Description:** ${command.description}`);

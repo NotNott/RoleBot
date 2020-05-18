@@ -1,6 +1,7 @@
 module.exports = {
     name: 'red',
-    description: '',
+    description: 'Gives a red color to the role',
+    usage: '!red @role',
     execute(message, Role) {
       Role.forEach(role => {
         role.setColor( '#FF0000' )});

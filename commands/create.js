@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'create',
-    description: '',
+    description: 'Creates a new role',
+    usage: '!create name',
     aliases: ['c', 'make'],
     execute(message, Name){ 
         console.log(Name)
