@@ -29,7 +29,7 @@ bot.on('message', async (message) => {
     if (commandName == 'create' || commandName == 'c' || commandName == 'make') {
       command.execute(message, Name);
     }
-    try{
+    else try{
       command.execute(message, Role, User);
       } catch(e){
           console.log(error);
