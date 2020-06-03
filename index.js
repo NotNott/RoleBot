@@ -20,7 +20,7 @@ bot.on('message', async (message) => {
     const args = message.content.slice(prefix.length).split(' ');
     const commandName = args.shift().toLowerCase();
     const Role = message.mentions.roles.first(99);
-    const Name = args.join(' ');
+    const Name = args.join(/ +/);
     const User = message.mentions.members.first(99);
     const command = bot.commands.get(commandName) || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
     

@@ -4,6 +4,7 @@ module.exports = {
     usage: '!create name',
     aliases: ['c', 'make'],
     execute(message, Name){ 
+      if (!Name) return message.channel.send("The name should be one or more words.");
       try{   
         message.guild.roles.create(
         {
